@@ -1,0 +1,41 @@
+.qas_main {
+    background: #d6e2ef;
+    border-radius: 5px;
+    color: #346cb0;
+    padding: 1px 5px;
+    margin-right: 5px;
+}
+
+
+.qas_title {
+    color: #cbd9eb;
+    border-left: 1px solid rgb(28 43 102);
+    margin-left: 0px;
+    padding: 0 1rem;
+    min-width: 3.5rem;
+    min-height: 3.5rem;
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.icon-group_Config:before {
+    content: "\f5fd";
+    font-size: 24px;
+    font-family: 'Font Awesome 5 Pro';
+  }
+
+  .icon-segments:before {
+    content: "\f4b7";
+    font-size: 21px;
+    font-family: 'Font Awesome 5 Pro';
+  }
+
+  .card-header {
+    .custom-file, .custom-file-input {
+      width: 20%;
+      margin-right: 10px;
+    }
+  }
+  

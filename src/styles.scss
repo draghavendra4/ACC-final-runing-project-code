@@ -1,0 +1,183 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+.menu-text {
+    white-space: nowrap;
+}
+
+/*Page-nav Tab CSS*/
+.page-navs {
+    z-index: 0;
+    .nav-tabs .nav-link {
+        color: #888c9b;
+        border-top: 0px;
+        border-left: 0px;
+        border-right: 0px;
+    }
+
+    .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus  {
+       border-bottom: 4px solid #243782;
+        color: #243782;
+        border-top: 0px;
+        border-left: 0px;
+        border-right: 0px;
+    }
+
+    .nav-tabs .nav-link.active {
+        border-bottom: 4px solid #243782;
+        color: #243782;
+        font-weight: bold;
+        border-top: 0px;
+        border-left: 0px;
+        border-right: 0px;
+    }
+}
+
+/*Table CSS*/
+.page-section {
+    .card-header {
+        background-color: #fff;
+    }
+    .card {
+        border: 0px;
+    }
+
+    .table > :not(:first-child) {
+        border-top: 0px;
+    }
+
+    .table>thead tr:first-child>th:first-child, .table>tbody tr:first-child>td:first-child {
+        width: 20px;
+    }
+
+    .table>thead tr:first-child>th:first-child, .card>.table-responsive>.table th:last-child {
+        border-radius: 0px;
+    }
+
+    .row-lastchild-border {
+        th:last-child {
+            border-right: 1px solid red;
+        }
+    }
+
+    .table thead th {
+        background: #43aaa0; 
+        color: #fff;
+        padding: 0px 0px 0px 10px;
+        vertical-align: middle;
+    }
+
+    .table td, .table th {
+        border-right: 1px solid #d5d0d0;
+    }
+
+    .table-bordered > :not(caption) > * > * {
+        border-width: thin;
+    }
+    thead, tbody, tfoot, tr, td, th {
+        border-style: none;
+    }
+}
+
+.table  {
+    .table-second-row {
+        th, th:last-child {
+            border-right: 1px solid #d5d0d0 !important;
+            border-top: 1px solid #d5d0d0 !important;
+            width: 10%;
+        }
+    }
+    
+}
+
+.align-center {
+    text-align: center;
+}
+/*End of Table CSS*/
+
+.btn-orange {
+    color: #fff;
+    background-color: #eca935;
+    border-color: #eca935;
+    margin-right: 10px;
+
+    &:hover {
+        background-color: #e29c23;
+        color: #fff;
+    }
+}
+.form-check-input {
+position: relative;
+margin-left: 0px;
+}
+.form-check-input:checked {
+    background-color: #43aaa0;
+    border-color: #ffffff;
+}
+
+.form-check-input:focus {
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    box-shadow: none;
+}
+
+/*Start of Pagination*/
+.pagination {
+    display: block;
+    text-align: center;
+}
+
+.page-item.active .page-link {
+    background-color: #eca935;
+    border-color: #eca935;
+}
+
+.page-link {
+    color: #463f3f;
+    width: 30px;
+    border-radius: 3rem;
+}
+li.page-item {
+    display: inline-block;
+}
+.page-item:last-child .page-link, .page-item:first-child .page-link {
+    background: none;
+    border: 0px;
+    font-weight: bold;
+    font-size: larger;
+}
+
+
+/*End of Pagination*/
+
+@media (min-width: 768px) {
+    .btn-group-sm>.btn-icon.btn, .btn-icon.btn-sm {
+        line-height: initial;
+        width: 25px;
+        height: 25px;
+        padding: 2px;
+        border-radius: 15px;
+        color: #43aaa0;
+    }
+}
+
+.btn-sm {
+    margin-right: 5%;
+
+    .fa-trash-alt:before {
+        color: red;
+    }
+}
+
+.custom-file-input1::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+  .custom-file-input1::before {
+    content: 'Select some files';
+    @extend .btn, .btn-orange
+  }
+  .custom-file-input1:hover::before {
+    border-color: black;
+  }
+  .custom-file-input1:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+  }

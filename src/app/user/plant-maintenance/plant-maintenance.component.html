@@ -1,0 +1,358 @@
+<nav class="page-navs">
+    <!-- .nav-scroller -->
+    <div class="nav-scroller">
+        <!-- .nav -->
+        <div class="nav nav-center nav-tabs">
+            <a class="nav-link active" href="user-teams.html">Initial Setup</a>
+            <a class="nav-link" href="user-projects.html">Security Setup</a>
+            <a class="nav-link" href="user-tasks.html">Validation</a>
+            <a class="nav-link" href="user-profile-settings.html">Sync</a>
+            <a class="nav-link" href="user-profile-settings.html">Help</a>
+        </div><!-- /.nav -->
+    </div><!-- /.nav-scroller -->
+</nav>
+<div class="wrapper">
+    <div class="page">
+        <div class="page-inner">
+            <header class="page-title-bar">
+                <!-- .breadcrumb -->
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active">
+                            <a href="#"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Back</a>
+                        </li>
+                    </ol>
+                </nav><!-- /.breadcrumb -->
+                <!-- title -->
+                <h1 class="page-title"> </h1>
+                <p class="text-muted"> </p><!-- /title -->
+            </header>
+
+            <div class="page-section">
+                <div class="card card-fluid">
+                    <!-- .card-header -->
+                    <div class="card-header border-0">
+                        <div class="d-flex align-items-center">
+                            <span class="mr-auto">Plant</span>
+                            <div class="button-group">
+                                <!-- <input type="file" (change)="selectFile($event)" name="fileUpload" accept=".xls,.xlsx"> -->
+                                <!-- <button class="btn btn-orange"><i class="fa-solid fa-download"></i> Import
+                                    Configuration</button> -->
+
+                                    <div class="btn btn-orange fileinput-button">
+
+                                        <i class="fa-solid fa-download"></i> <span>&nbsp;Import Configuration</span>
+    
+                                        <input id="fileupload-btn" (change)="selectFile($event)" name="fileUpload" accept=".xls,.xlsx" class="custom-input-choose" type="file">
+    
+                                      </div>
+
+                                      
+
+                                <button class="btn btn-orange" (click)="exportpdf()"><i class="fa fa-file-pdf"></i>
+                                    Export PDF</button>
+                                <button class="btn btn-orange" (click)="exportexcel()"><i
+                                        class="fa-regular fa-file-excel"></i> Export CSV</button>
+                                <button class="btn btn-orange" (click)="addRow()"><i class="fa-solid fa-plus"></i> Add
+                                    Row</button>
+                                <button class="btn btn-orange" (click)="Refreshdata()"><i
+                                        class="fa-solid fa-refresh"></i> Refresh</button>
+                            </div>
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-icon btn-light" data-toggle="dropdown"
+                                    aria-expanded="false" [disabled]="!isDisabled ? true : false"><i class="fa fa-ellipsis-v"></i></button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <div class="dropdown-arrow"></div>
+                                    <button class="dropdown-item" (click)="SaveAllData()"><i
+                                            class="fa fa-save"></i> Save All</button>
+                                    <button class="dropdown-item" (click)="editAll()"> <i class="fa fa-pencil-alt"></i>
+                                        Edit All</button>
+                                    <button (click)="CancelAll()" class="dropdown-item"><i class="fa fa-close"></i>
+                                        Cancel All</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.card-header -->
+                    <!-- .table-responsive -->
+                    <div class="table-responsive p-3" id="content" #content>
+                        <!-- .table -->
+                        <form [formGroup]="myReactiveForm" (ngSubmit)="recordSubmit()">
+                            <table #exceltbl class="table table-striped table-bordered table-hover display">
+                                <!-- thead -->
+                                <thead class="thead-">
+                                    <tr>
+                                        <th rowspan="2"><input class="form-check-input" type="checkbox" id="check1"
+                                            name="option1" value="something" [checked]="masterSelected" (change)="checkUncheckAll($event)"></th>
+                                        <th rowspan="2"> Plant ID </th>
+                                        <th rowspan="2"> Plant Code </th>
+                                        <th rowspan="2"> Plant Name </th>
+                                        <th rowspan="2"> Status </th>
+                                        <th colspan="2" class="align-center"> Last Update </th>
+                                        <th rowspan="2"> Action </th>
+                                    </tr>
+                                    <tr class="table-second-row">
+                                        <th> TID </th>
+                                        <th> Time </th>
+                                    </tr>
+                                </thead><!-- /thead -->
+                                <!-- tbody -->
+                                <tbody>
+                                    <tr *ngIf="plantMaintenArray.length < 1 && !isFetching">
+                                        <td colspan="7"><p>No Data Available!!!</p></td>
+                                    </tr>
+                                    <tr *ngIf="isFetching">
+                                        <!-- <td colspan="7"><p>Loading data...</p></td> -->
+                                    </tr>
+
+                                    <tr *ngFor="let plantdata of plantMaintenA; let i = index;">
+
+                                        <td><input class="form-check-input" type="checkbox" id="check1" name="option1"
+                                                value="something" checked></td>
+                                        <td class="form-group">
+
+                                            <input class="form-control" type="text" formControlName="id" id="id" />
+                                            <div *ngIf="f['id'].touched && f['id'].invalid" class="alert alert-danger">
+                                                <div *ngIf="f['id'].errors && f['id'].errors['required']"><b>Id</b> is
+                                                    required.</div>
+                                                <div *ngIf="f['id'].errors && f['id'].errors['minlength']"><b>Id</b>
+                                                    should be 3 character.</div>
+                                            </div>
+
+                                        </td>
+                                        <td class="form-group">
+
+                                            <input class="form-control" type="text" formControlName="plantCode" />
+                                            <div *ngIf="f['plantCode'].touched && f['plantCode'].invalid"
+                                                class="alert alert-danger">
+                                                <div *ngIf="f['plantCode'].errors && f['plantCode'].errors['required']">
+                                                    <b>Plant Code</b> is required.</div>
+                                            </div>
+
+                                        </td>
+                                        <td class="form-group">
+
+                                            <input class="form-control" type="text" formControlName="plantName" />
+                                            <div *ngIf="f['plantName'].touched && f['plantName'].invalid"
+                                                class="alert alert-danger">
+                                                <div *ngIf="f['plantName'].errors && f['plantName'].errors['required']">
+                                                    <b>Plant Name</b> is required.</div>
+                                            </div>
+
+                                        </td>
+                                        <!-- <td class="form-group">
+
+                                            <input class="form-control" type="text" formControlName="division" />
+
+
+                                        </td> -->
+                                        <td class="form-group">
+
+                                            <!-- <input class="form-control" type="text" formControlName="status" /> -->
+                                            <select class="form-control form-select" id="status"
+                                                formControlName="status">
+                                                <option value="" disabled>Choose Status</option>
+                                                <option value="Y">Active</option>
+                                                <option value="N">Inactive</option>
+                                            </select>
+                                            <div *ngIf="f['status'].touched && f['status'].invalid"
+                                                class="alert alert-danger">
+                                                <div *ngIf="f['status'].errors && f['status'].errors['required']">
+                                                    <b>Status</b> is required.</div>
+                                            </div>
+                                        </td>
+                                        <td class="form-group">
+                                            <input class="form-control" type="text" [value]="plantdata.tid"
+                                            formControlName="tid" readonly />
+                                            <!-- <input class="form-control" type="text" formControlName="tid" />
+                                            <div *ngIf="f['tid'].touched && f['tid'].invalid"
+                                                class="alert alert-danger">
+                                                <div *ngIf="f['tid'].errors && f['tid'].errors['required']"><b>TID</b>
+                                                    is required.</div>
+                                            </div> -->
+
+                                        </td>
+                                        <td class="form-group">
+
+                                            <input class="form-control" type="text" [value]="plantdata.updatedDate"
+                                                formControlName="updatedDate" readonly />
+                                            <!-- <input class="form-control" type="text" formControlName="updatedDate" />
+                                            <div *ngIf="f['updatedDate'].touched && f['updatedDate'].invalid"
+                                                class="alert alert-danger">
+                                                <div
+                                                    *ngIf="f['updatedDate'].errors && f['updatedDate'].errors['required']">
+                                                    <b>Date</b> is required.</div>
+                                            </div> -->
+
+                                        </td>
+                                        <td>
+
+
+                                            <button type="submit" class="btn btn-success"
+                                                [disabled]="myReactiveForm.invalid">Save</button> &nbsp;&nbsp;
+
+                                            <button class="btn btn-orange" (click)="CancelRow(i)">Cancel</button>
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr *ngFor="let Updateplantdata of plantMaintenArray | paginate:
+                                    {
+                                        itemsPerPage: tableSize,
+                                        currentPage: page,
+                                        totalItems: count
+                                    }; let i = index;">
+                                        <td><input class="form-check-input" type="checkbox" id="check1" name="option1"
+                                        [checked]="Updateplantdata.isSelected" value="{{Updateplantdata.id}}" (change)="isAllSelected($event, i)"></td>
+                                        <td>
+
+                                            {{Updateplantdata.id}}
+
+                                        </td>
+                                        <td>
+
+
+                                            {{Updateplantdata.plantCode}}
+
+                                        </td>
+                                        <td class="form-group">
+
+                                            <div *ngIf="!Updateplantdata.isEdit">
+                                                {{Updateplantdata.plantName}}
+                                            </div>
+                                            <div *ngIf="Updateplantdata.isEdit">
+                                                <input class="form-control" [(ngModel)]="Updateplantdata.plantName"
+                                                    type="text" [ngModelOptions]="{standalone: true}"/>
+                                            </div>
+                                        </td>
+                                        <!-- <td class="form-group">
+
+                                            <div *ngIf="!Updateplantdata.isEdit">
+                                                {{Updateplantdata.division}}
+                                            </div>
+                                            <div *ngIf="Updateplantdata.isEdit">
+                                                <input  class="form-control" [(ngModel)]="Updateplantdata.division"
+                                                    type="text" formControlName="division"/>
+                                            </div>
+                                        </td> -->
+                                        <td class="form-group">
+
+
+
+                                            <div *ngIf="!Updateplantdata.isEdit">
+                                                  <span *ngIf="Updateplantdata.status == 'Y'">Active</span>
+
+                                                  <span *ngIf="Updateplantdata.status == 'N'">Inactive</span>
+
+                                                 {{Updateplantdata.status}} 
+                                            </div>
+                                            <div *ngIf="Updateplantdata.isEdit">
+                                                <!-- <input class="form-control"  [(ngModel)]="plantMaintenArray[i].status"
+                                                type="text" [ngModelOptions]="{standalone: true}" /> -->
+                                                <select class="form-control form-select" id="status" [(ngModel)]="Updateplantdata.status"
+                                                [ngModelOptions]="{standalone: true}">
+                                                <option value="" disabled>Choose Status</option>
+                                                <option value="Y">Active</option>
+                                                <option value="N">Inactive</option>
+                                            </select>
+                                            </div>
+                                        </td>
+                                        <td>
+
+
+                                            {{Updateplantdata.tid}}
+
+                                        </td>
+                                        <td>
+
+
+                                            {{Updateplantdata.updatedDate | date: 'dd/MM/yyyy hh:mm a'}}
+
+                                        </td>
+                                        <td>
+                                            <!-- <button (click)="edit(plantdata)">{{plantdata.isEdit === true ?
+                                'Update':'Edit'}}</button>
+                            <button (click)="cancelRow(plantdata)">Cancel</button> -->
+                                            <span *ngIf="Updateplantdata.isEdit">
+                                                <button type="button" class="btn btn-success"
+                                                    (click)="updateRow(Updateplantdata)">Update</button> &nbsp;
+                                                <button class="btn btn-orange"
+                                                    (click)="CancelUpdateRow(Updateplantdata)">Cancel</button>
+                                            </span>
+                                            <span *ngIf="!Updateplantdata.isEdit">
+                                                <button type="button" class="btn btn-sm btn-icon btn-secondary"
+                                                    (click)="edit(Updateplantdata)" [disabled]="!isShowButton[i]"><i
+                                                        class="fa fa-pencil-alt"></i></button>
+                                                <!-- <a class="btn btn-sm btn-icon btn-secondary" href="#"><i
+                                                        class="fa fa-save"></i></a>
+                                                <a class="btn btn-sm btn-icon btn-secondary" href="#"><i
+                                                        class="fa fa-close"></i></a> -->
+                                                <button type="button" class="btn btn-sm btn-icon btn-secondary"
+                                                    (click)="onDelete(Updateplantdata.id, i)" [disabled]="!isShowButton[i]"><i
+                                                        class="far fa-trash-alt"></i></button>
+                                            </span>
+                                        </td>
+                                    </tr>
+
+                                </tbody><!-- /tbody -->
+                            </table><!-- /.table -->
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="d-flex justify-content-start">
+                                        Showing &nbsp; <b> {{term}} </b>&nbsp; entries
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="d-flex justify-content-end">
+                                        <pagination-controls previousLabel="prev" nextLabel="Next" (pageChange)="onTableDataChange($event)"></pagination-controls>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div><!-- /.table-responsive -->
+
+                </div>
+                <!-- <div class="el-example">
+          <ul class="pagination pagination-sm">
+            <li class="page-item disabled">
+              <a class="page-link" href="#">«</a>
+            </li>
+            <li class="page-item active">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">3</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">4</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">5</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">»</a>
+            </li>
+          </ul>
+        </div> -->
+            </div><!-- end of page-section-->
+
+        </div>
+    </div>
+</div>
+
+<!-- <table>
+    <tbody>
+        <tr *ngFor="let row of data ">
+            <td *ngFor="let cell of row">
+                {{convertedJson}}
+            </td>
+        </tr>
+    </tbody>
+</table> -->
+
+<div>
+    {{stringJson}}
+</div>

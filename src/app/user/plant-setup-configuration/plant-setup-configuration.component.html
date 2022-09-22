@@ -1,0 +1,63 @@
+<div class="grid-table">
+    <div class="thead">
+        <div class="tr">
+            <div class="td">#</div>
+            <div class="td">Id</div>
+            <div class="td">plantCode</div>
+            <div class="td">plantName</div>
+            <!-- <div class="td">division</div> -->
+            <div class="td">status</div>
+            <div class="td">tid</div>
+            <div class="td">updatedDate</div>
+            <div class="td">
+                <button class="btn btn-outline-success" (click)="addBankAccountForm()">
+                    Add Row
+                </button>
+            </div>
+
+        </div>
+    </div>
+    <div class="tbody">
+        <form class="tr" [formGroup]="fg" *ngFor="let fg of plantMaintenanceForms.controls; let i=index;"
+            (submit)="recordSubmit(fg)">
+            <div class="td">
+                <td>{{i + 1}}</td>
+            </div>
+            <div class="td">
+                <div *ngIf="!fg.isEdit">
+                    <input class="form-control" formControlName="id">
+                </div>
+                <div *ngIf="fg.isEdit">
+                    {{fg.id}}
+                </div>
+            </div>
+            <div class="td">
+                <input class="form-control" formControlName="plantCode">
+            </div>
+            <div class="td">
+                <input class="form-control" formControlName="plantName">
+            </div>
+            <!-- <div class="td">
+                <input class="form-control" formControlName="division">
+            </div> -->
+            <div class="td">
+                <input class="form-control" formControlName="status">
+            </div>
+            <div class="td">
+                <input class="form-control" formControlName="tid">
+            </div>
+            <div class="td">
+                <input class="form-control" formControlName="updatedDate">
+            </div>
+            <div class="td">
+                <button type="submit" [ngClass]="(fg.get('id').value==0)?'btn-success':'btn-outline-dark'"
+                    [disabled]="fg.invalid">
+                    {{fg.get('id').value==0?'Submit':'Edit'}}
+                </button>
+                <button class="btn btn-light ml-1" (click)="onDelete(fg.get('id').value,i)">
+                    <i class="far fa-trash-alt fa-lg text-danger"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<!-- <p>side-navbar works!</p>
+<a routerLink="user-home" >User Home</a>
+<br>
+<a routerLink="plant-setup">Plant Setup</a> -->
+
+<div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed': ''">
+    <div class="aside-content">
+        <div class="logo-container">
+            <button class="logo" (click)="toggleCollapse()"><i class="fal fa-bars"></i></button>
+            <!-- <button class="btn-close" @rotate *ngIf="collapsed" (click)="closeSidenav()">
+                <i class="fal fa-times close-icon"></i>
+            </button> -->
+        </div>
+        
+        
+        <ul class="sidenav-nav aside-menu overflow-hidden ps ps--active-y">
+           
+            <!-- .stacked-menu -->
+            <nav id="stacked-menu" class="stacked-menu stacked-menu-has-compact stacked-menu-has-hoverable">
+                <!-- .menu -->
+                <ul class="menu">
+                    <!-- .menu-item -->
+                    <li class="menu-item has-active sidenav-nav-item" *ngFor="let data of navData">
+                        <a href="#" class="sidenav-nav-link" [routerLink]="[data.routeLink]" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{exact: true}">
+                            <span class="menu-icon sidenav-link-icon" [class]="data.icon"></span>
+                            <span class="menu-text sidenav-link-text">{{data.label}}</span></a>
+                    </li>
+
+
+                </ul><!-- /.menu -->
+            </nav><!-- /.stacked-menu -->
+            
+            <nav id="stacked-menu" class="stacked-menu stacked-menu-has-compact stacked-menu-has-hoverable">
+                <!-- .menu -->
+                <ul class="menu">
+                    <!-- .menu-item -->
+                    <hr>
+                    <li class="menu-item has-active sidenav-nav-item">
+                        <a href="#" class="sidenav-nav-link">
+                            <span class="menu-icon sidenav-link-icon">
+                                <i class="fal fa-sign-out"></i>
+                            </span>
+                            <span class="menu-text sidenav-link-text">Logout</span></a>
+                    </li>
+
+
+                </ul><!-- /.menu -->
+            </nav><!-- /.stacked-menu -->
+        </ul>
+
+    </div>
+</div>

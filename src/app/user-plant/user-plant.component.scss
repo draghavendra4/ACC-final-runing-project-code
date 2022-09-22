@@ -1,0 +1,57 @@
+.app-header{
+    position: inherit !important;
+}
+.h4-color{
+    color: #505050;
+}
+
+.p-color{
+    color: #777777;
+}
+
+.hover-zoomin a {
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+  
+.hover-zoomin img {
+    width: 100%;
+    height: auto;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    border-radius: 1rem;
+}
+
+// .hover-zoomin:hover img {
+//     -webkit-transform: scale(1.2);
+//     -moz-transform: scale(1.2);
+//     -o-transform: scale(1.2);
+//     -ms-transform: scale(1.2);
+//     transform: scale(1.2);
+// }
+
+.hover-zoomin a h4 {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    padding: 25% 20px;
+    text-align: center;
+    // background-color: rgba(0, 0, 0, 0.299);
+    -webkit-background-size: 3px 3px;
+    -moz-background-size: 3px 3px;
+    background-size: 3px 3px;
+    -webkit-transition: all 0.5s linear;
+    -moz-transition: all 0.5s linear;
+    -o-transition: all 0.5s linear;
+    -ms-transition: all 0.5s linear;
+    transition: all 0.5s linear;
+    
+  }
+ 
